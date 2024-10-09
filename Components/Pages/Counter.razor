@@ -1,0 +1,372 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using System.Globalization;
+
+<PageTitle>Calculadora</PageTitle>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <div class="form-text"
+                         id="basic-addon4">Compañía I</div>
+                    <!-- Bruto Compania 1 Input -->
+                    <div class="input-group">
+                        <span class="input-group-text"
+                              id="basic-addon1">
+                            <i class="bi bi-currency-dollar"></i>
+                        </span>
+                        <input type="number"
+                               class="form-control"
+                               placeholder="Salario Bruto Compañía 1"
+                               @bind="brutoComp1"
+                               @bind:event="oninput"
+                               min="0"
+                               aria-label="SalarioBruto"
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-text"
+                         id="basic-addon4">Compañía II</div>
+                    <!-- Bruto Compania 2 Input -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"
+                              id="basic-addon1">
+                            <i class="bi bi-currency-dollar"></i>
+                        </span>
+                        <input type="number"
+                               class="form-control"
+                               placeholder="Salario Bruto Compañía 2"
+                               @bind="brutoComp2"
+                               @bind:event="oninput"
+                               min="0"
+                               aria-label="SalarioBruto"
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <div class="form-text"
+                         id="basic-addon4">Horas trabajadas</div>
+                    <!-- Bruto Compania 1 Input -->
+                    <div class="input-group">
+                        <span class="input-group-text"
+                              id="basic-addon1">
+                            <i class="bi bi-clock"></i>
+                        </span>
+                        <input type="number"
+                               class="form-control"
+                               placeholder="Salario Bruto Compañía 1"
+                               @bind="horasComp1"
+                               @bind:event="oninput"
+                               min="0"
+                               aria-label="SalarioBruto"
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-text"
+                         id="basic-addon4">Horas trabajadas</div>
+                    <!-- Bruto Compania 2 Input -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"
+                              id="basic-addon1">
+                            <i class="bi bi-clock"></i>
+                        </span>
+                        <input type="number"
+                               class="form-control"
+                               placeholder="Salario Bruto Compañía 2"
+                               @bind="horasComp2"
+                               @bind:event="oninput"
+                               min="0"
+                               aria-label="SalarioBruto"
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tax PR Input -->
+            <div class="form-text"
+                 id="basic-addon4">Impuesto PR aprox 9.5% para salarios de 55k</div>
+            <div class="input-group mb-3">
+                <input type="number"
+                       class="form-control"
+                       @bind="taxPR"
+                       @bind:event="oninput"
+                       placeholder="Tax PR"
+                       aria-label="Tax PR">
+                <span class="input-group-text"
+                      id="basic-addon2">
+                    <i class="bi bi-percent"></i>
+                </span>
+            </div>
+
+            <!-- SS and Medicare Input -->
+            <div class="form-text"
+                 id="basic-addon4">SS and Medicare Impuesto aprox 9.89%</div>
+            <div class="input-group mb-3">
+                <input type="number"
+                       class="form-control"
+                       @bind="sSMedicare"
+                       @bind:event="oninput"
+                       placeholder="SS y Medicaid"
+                       aria-label="SS y Medicaid">
+                <span class="input-group-text"
+                      id="basic-addon2">
+                    <i class="bi bi-percent"></i>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Company 1 Results -->
+        <div class="col-md-6">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Compañía 1</th>
+                        <th>Resultados</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Salario Bruto</td>
+                        <td>$@brutoComp1?.ToString("N2")</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>After PR TAX<span class="badge text-danger fs-7">@taxPR%</span></td>
+                        <td>$@taxPRResultComp1?.ToString("N2")</td>
+                        <td><span class="badge text-danger fs-7">-@resultAfterTaxPRComp1?.ToString("N2")</span></td>
+                    </tr>
+                    <tr>
+                        <td>After SS and Medicare<span class="badge text-danger fs-7">@sSMedicare%</span></td>
+                        <td>@sSMedicareResultComp1?.ToString("N2")</td>
+                        <td><span class="badge text-danger fs-7">-@resultAfterSSAndMedicareComp1?.ToString("N2")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total After </td>
+                        <td><span class="badge text-success fs-6"> $@totalAfterbothTaxesComp1?.ToString("N2")</span>
+                        </td>
+                        <td><span class="badge text-danger fs-7">-$@totalDeTaxesComp1?.ToString("N2")</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ganancia bisemanal</td>
+                        <td><span class="badge text-success fs-6">
+                                $@gananciaBisemanalComp1?.ToString("N2") </span></td>
+                        <td>26 bisemanas en un año</td>
+                    </tr>
+                    <tr>
+                        <td>Ganancia por hora <span class="badge text-danger">@horasComp1 H</span> </td>
+                        <td><span class="badge text-success fs-6">
+                                $@totalPerHourComp1?.ToString("N2") </span></td>
+                        <td>No considerando remoto son más horas de tráfico y preparación</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Company 2 Results -->
+        <div class="col-md-6">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Compañía 2</th>
+                        <th>Resultados</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Salario Bruto </td>
+                        <td>$@brutoComp2?.ToString("N2")</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>After PR TAX <span class="badge text-danger fs-7">@taxPR%</span></td>
+                        <td>$@taxPRResultComp2?.ToString("N2")</td>
+                        <td><span class="badge text-danger fs-7">-@resultAfterTaxPRComp2?.ToString("N2")</span></td>
+                    </tr>
+                    <tr>
+                        <td>After SS and Medicare <span class="badge text-danger fs-7">@sSMedicare%</span></td>
+                        <td>$@sSMedicareResultComp2?.ToString("N2")</td>
+                        <td><span class="badge text-danger fs-7">-@resultAfterSSAndMedicareComp2?.ToString("N2")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Total After </td>
+                        <td><span class="badge text-success fs-6"> $@totalAfterbothTaxesComp2?.ToString("N2")</span>
+                        </td>
+                        <td><span class="badge text-danger fs-7">-$@totalDeTaxesComp2?.ToString("N2")</span></td>
+                    </tr>
+                    <tr>
+                        <td>Ganancia bisemanal</td>
+                        <td><span class="badge text-success fs-6">
+                                $@gananciaBisemanalComp2?.ToString("N2") </span></td>
+                        <td>26 bisemanas en un año</td>
+                    </tr>
+                    <tr>
+                        <td>Ganancia por hora <span class="badge text-danger">@horasComp2 H</span> </td>
+                        <td><span class="badge text-success fs-6">
+                                $@totalPerHourComp2?.ToString("N2") </span></td>
+                        <td>No considerando remoto son más horas de tráfico y preparación</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<section class="py-5 bg-light text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                @* <h1 class="display-4 fw-bold">Salary Comparison</h1> *@
+                <p class="lead">Compare your potential income between two companies.</p>
+            </div>
+        </div>
+
+        <!-- Comparison Columns -->
+        <div class="row g-4 justify-content-center">
+            <!-- Company 1 -->
+            <div class="col-lg-5 col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary">Company I</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Ganancia  trabajando @horasComp1 Horas
+                                <span class="fw-bold">$@totalPerHourComp1?.ToString("N2")/h</span>
+                            </li>
+                            @* <li class="list-group-item d-flex justify-content-between align-items-center">
+                            After Tax (9.5%)
+                            <span class="fw-bold">$49,775</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            SS & Medicare (9.89%)
+                            <span class="fw-bold">$44,871</span>
+                            </li> *@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company 2 -->
+            <div class="col-lg-5 col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title text-success">Company II</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Ganancia  trabajando @horasComp2 Horas
+                                <span class="fw-bold">$@totalPerHourComp2?.ToString("N2")/h</span>
+                            </li>
+                            @* <li class="list-group-item d-flex justify-content-between align-items-center">
+                            After Tax (9.5%)
+                            <span class="fw-bold">$58,825</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            SS & Medicare (9.89%)
+                            <span class="fw-bold">$53,167</span>
+                            </li> *@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mega Winner Card -->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-success bg-light shadow-lg text-center">
+                    <div class="card-body">
+
+                        @if (totalPerHourComp1 > totalPerHourComp2)
+                        {
+
+                            <h2 class="card-title text-success display-5 fw-bold">🏆 Company 1 Wins!</h2>
+                            <p class="card-text lead">
+                            After careful consideration, <span class="text-success fw-bold">Company 1</span> offers a
+                            higher net salary and better overall benefits.
+                            With a pay per hour <span class="fw-bold">$@totalPerHourComp1?.ToString("N2")</span>
+                            @* <span class="fw-bold">$53,167</span>. *@
+                        </p>
+                            @* <a href="#" class="btn btn-success btn-lg mt-4 px-5">Choose Company 2</a> *@
+                        }
+                        else
+                        {
+                            <h2 class="card-title text-success display-5 fw-bold">🏆 Company 2 Wins!</h2>
+                            <p class="card-text lead">
+                            After careful consideration, <span class="text-success fw-bold">Company 2</span> offers a
+                            higher net salary and better overall benefits.
+                            With a pay per hour <span class="fw-bold">$@totalPerHourComp2?.ToString("N2")</span>
+                            @* <span class="fw-bold">$53,167</span>. *@
+                        </p>
+                            @* <a href="#" class="btn btn-success btn-lg mt-4 px-5">Choose Company 2</a> *@
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@code {
+    private decimal? brutoComp1 = 55000.00M;
+    private decimal? brutoComp2 = 65000.00M;
+    private decimal? horasComp1 = 80;
+    private decimal? horasComp2 = 80;
+    private decimal? totalPerHourComp1 => (gananciaBisemanalComp1 / horasComp1);
+    private decimal? totalPerHourComp2 => (gananciaBisemanalComp2 / horasComp2);
+    private decimal? taxPR = 9.5M;
+    private decimal? sSMedicare = 9.89M;
+    private decimal? taxPRResultComp1 => CalculateTax(brutoComp1, taxPR);
+    private decimal? taxPRResultComp2 => CalculateTax(brutoComp2, taxPR);
+
+    private decimal? sSMedicareResultComp1 => CalculateTax(brutoComp1, sSMedicare);
+    private decimal? sSMedicareResultComp2 => CalculateTax(brutoComp2, sSMedicare);
+
+    private decimal? resultAfterTaxPRComp1 => CalculateAfterTaxes(taxPRResultComp1, brutoComp1);
+    private decimal? resultAfterTaxPRComp2 => CalculateAfterTaxes(taxPRResultComp2, brutoComp2);
+
+    private decimal? resultAfterSSAndMedicareComp1 => CalculateAfterTaxes(sSMedicareResultComp1, brutoComp1);
+    private decimal? resultAfterSSAndMedicareComp2 => CalculateAfterTaxes(sSMedicareResultComp2, brutoComp2);
+
+    private decimal? totalAfterbothTaxesComp1 => (brutoComp1 - (resultAfterTaxPRComp1 + resultAfterSSAndMedicareComp1));
+    private decimal? totalAfterbothTaxesComp2 => (brutoComp2 - (resultAfterTaxPRComp2 + resultAfterSSAndMedicareComp2));
+    private decimal? totalDeTaxesComp1 => (resultAfterTaxPRComp1 + resultAfterSSAndMedicareComp1);
+    private decimal? totalDeTaxesComp2 => (resultAfterTaxPRComp2 + resultAfterSSAndMedicareComp2);
+    const int TotalBisemanasEnUnAño = 26;
+    private decimal? gananciaBisemanalComp1 => (totalAfterbothTaxesComp1 / TotalBisemanasEnUnAño);
+    private decimal? gananciaBisemanalComp2 => (totalAfterbothTaxesComp2 / TotalBisemanasEnUnAño);
+
+
+
+
+    private decimal? CalculateTax(decimal? salary, decimal? taxRate)
+    {
+        if (salary.HasValue && taxRate.HasValue)
+        {
+            return salary - ((taxRate / 100) * salary);
+        }
+        return null;
+    }
+    private decimal? CalculateAfterTaxes(decimal? resultAfterTax, decimal? brutoSalary)
+    {
+        if (resultAfterTax.HasValue && brutoSalary.HasValue)
+        {
+            return brutoSalary - resultAfterTax;
+        }
+        return null;
+    }
+
+}

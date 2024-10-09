@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/samuelh.ocasio/Documents/BlazorApps/CalculadoraSueldos/obj/Debug/net8.0/scopedcss/projectbundle/CalculadoraSueldos.bundle.scp.css",
+      "PackagePath": "staticwebassets/CalculadoraSueldos.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/samuelh.ocasio/Documents/BlazorApps/CalculadoraSueldos/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/Users/samuelh.ocasio/Documents/BlazorApps/CalculadoraSueldos/wwwroot/bootstrap/bootstrap.min.css",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/samuelh.ocasio/Documents/BlazorApps/CalculadoraSueldos/wwwroot/bootstrap/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/samuelh.ocasio/Documents/BlazorApps/CalculadoraSueldos/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CalculadoraSueldos.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.CalculadoraSueldos.props",
+      "PackagePath": "build\\CalculadoraSueldos.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.CalculadoraSueldos.props",
+      "PackagePath": "buildMultiTargeting\\CalculadoraSueldos.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.CalculadoraSueldos.props",
+      "PackagePath": "buildTransitive\\CalculadoraSueldos.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
